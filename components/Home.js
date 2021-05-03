@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 import { SafeAreaView, StyleSheet, Text, View, ImageBackground, Pressable, Picker, TextInput, TextComponent } from 'react-native';
 import axios from 'axios';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 // const image = { uri: "https://image.freepik.com/free-vector/realistic-polygonal-background_52683-61087.jpg" };
 
@@ -28,7 +29,7 @@ function HomeScreen({navigation}) {
       .get('http://api.exchangeratesapi.io/v1/latest?access_key=a70fcf85df4e14575510d3103cf29f2d&symbols=USD,AUD,CAD,PLN,MXN&format=1')
       .then(function (response) {
         setSelectedCurrency(response.data.rates)
-        // console.log(selectedToValue)
+   
       })
       .catch(function (error) {
         console.log(error.message);
@@ -65,7 +66,7 @@ function HomeScreen({navigation}) {
 
   return (
     <View style={styles.container1}>
-      {/* <ImageBackground source={image} style={styles.image}> */}
+
         <SafeAreaView style={styles.container2}>
           <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#FFFFFF" translucent = {false}/>
 
@@ -78,7 +79,7 @@ function HomeScreen({navigation}) {
                 <Picker.Item label="EUR" value="EUR" />
               </Picker>
 
-              <Text style={{color: 'white', fontSize: 40, fontWeight: 'bold'}}>TO</Text>
+              <FontAwesome5 name="exchange-alt" size={40} color="white" />
               <Picker
                 selectedValue={selectedToValue}
                 style={{color: 'white', height: 60, width: 250, borderColor:'white'}}
@@ -90,7 +91,7 @@ function HomeScreen({navigation}) {
                 <Picker.Item label="EUR" value="EUR" />
                 <Picker.Item label="MXN" value="MXN" />
                 <Picker.Item label="PLN" value="PLN" />
-                {/* AUD CAD EUR MXN PLN*/}
+               
               </Picker>
 
               <Text style={{color: '#FFFFFF', fontSize: 30, fontWeight: 'bold'}}>Exchange Currency</Text>
@@ -121,14 +122,14 @@ function HomeScreen({navigation}) {
                   <Text style={{color: '#FFFFFF',fontSize: 30}}>PLN: {selectedCurrency.PLN * input}</Text>
               )}
 
-              {/* <Text style={{color: '#FFFFFF'}}>C: {currencyVal}</Text> */}
+      
             
           </View>
 
           <View style={styles.contents}>
 
           <Pressable onPress={() => { getDataUsingSimpleGetCall() }} style={[styles.contentsText, styles.marginButtom]}>
-            <Text style={[styles.contentsText2]}>CONVERT NOW</Text>
+            <Text style={[styles.contentsText2]}>CONVERT</Text>
           </Pressable>
           <Pressable onPress={() => { navigation.navigate('currencyTable') }} style={[styles.contentsText, styles.marginButtom]}>
             <Text style={[styles.contentsText2]}>TABLE CURRENCY</Text>
@@ -136,7 +137,7 @@ function HomeScreen({navigation}) {
 
           </View>
         </SafeAreaView>
-      {/* </ImageBackground> */}
+
     </View>
   );
 }
@@ -176,19 +177,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 20,
-    borderRadius: 30
+    borderRadius: 15
   },
   contentsText2: {
-    color: '#000000',
+    color: 'green',
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 20,
-    borderRadius: 30
+    borderRadius: 15
   },
   default: {
     backgroundColor: '#FFFFFF',
     width: '80%',
-    height: 50
+    height: 50,
+    borderRadius:20,
+    marginTop:30
   }
 });
 
